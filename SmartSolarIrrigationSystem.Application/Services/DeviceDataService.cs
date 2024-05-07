@@ -16,4 +16,9 @@ public class DeviceDataService : IDeviceDataService
     {
         return await _deviceDataRepository.CreateAsync(deviceData, token);
     }
+
+    public async Task<DeviceData?> GetLastData(CancellationToken token = default)
+    {
+        return await _deviceDataRepository.GetLastData(token);
+    }
 }
