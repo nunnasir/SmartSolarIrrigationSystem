@@ -25,6 +25,8 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+app.UseCors();
+
 var dbInitializer = app.Services.GetRequiredService<DbInitializer>();
 await dbInitializer.InitializeAsync();
 
