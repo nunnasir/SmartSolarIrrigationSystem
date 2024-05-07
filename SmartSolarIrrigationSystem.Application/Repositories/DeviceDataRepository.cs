@@ -19,7 +19,7 @@ public class DeviceDataRepository : IDeviceDataRepository
 
         var result = await connection.ExecuteAsync(new CommandDefinition("""
             insert into IotDeviceData (Id, Ph, Mos, Nit, Phos, Pot, Water, Wfr, Node, Sensor, CreatedTime)
-            values (@Id, @Slug, @Title, @YearOfRelease)
+            values (@Id, @Ph, @Mos, @Nit, @Phos, @Pot, @Water, @Wfr, @Node, @Sensor, @CreatedTime)
             """, deviceData, cancellationToken: token));
 
         return result > 0;

@@ -10,6 +10,11 @@
     <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="8.0.0" />
     <PackageReference Include="MQTTnet" Version="4.3.3.952" />
     <PackageReference Include="MQTTnet.Extensions.ManagedClient" Version="4.3.3.952" />
+    <PackageReference Include="Newtonsoft.Json.Schema" Version="3.0.16" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SmartSolarIrrigationSystem.Application\SmartSolarIrrigationSystem.Application.csproj" />
   </ItemGroup>
 
 </Project>
