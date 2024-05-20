@@ -53,7 +53,7 @@ public class StandardDataRepository : IStandardDataRepository
                    fi.fieldId, 
                    fi.name
             FROM StandardValue sv 
-            JOIN FieldInfo fi ON sv.id = fi.FieldInfoId
+            JOIN FieldInfo fi ON sv.FieldInfoId = fi.id
             """, cancellationToken: token));
 
         var response = result.Select(x => new StandardValue
@@ -94,8 +94,8 @@ public class StandardDataRepository : IStandardDataRepository
                        fi.fieldId, 
                        fi.name
                 FROM StandardValue sv
-                JOIN FieldInfo fi ON sv.id = fi.FieldInfoId
-                where fi.fieldId = @fieldId
+                JOIN FieldInfo fi ON sv.FieldInfoId = fi.id
+                where sv.FieldInfoId = @fieldId
                 """, new { fieldId }, cancellationToken: token));
 
         if (standardData is null)
@@ -125,7 +125,7 @@ public class StandardDataRepository : IStandardDataRepository
                        fi.fieldId, 
                        fi.name
                 FROM StandardValue sv
-                JOIN FieldInfo fi ON sv.id = fi.FieldInfoId
+                JOIN FieldInfo fi ON sv.FieldInfoId = fi.id
                 where sv.id = @id
                 """, new { id }, cancellationToken: token));
 

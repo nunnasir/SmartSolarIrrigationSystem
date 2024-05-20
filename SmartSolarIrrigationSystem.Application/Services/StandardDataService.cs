@@ -35,7 +35,7 @@ public class StandardDataService : IStandardDataService
 
     public async Task<StandardValue?> GetByIdAsync(Guid id, CancellationToken token = default)
     {
-        return await _standardDataRepository.GetByFielIdAsync(id, token);
+        return await _standardDataRepository.GetByIdAsync(id, token);
     }
 
     public async Task<StandardValue?> UpdateAsync(StandardValue standardValue, CancellationToken token = default)

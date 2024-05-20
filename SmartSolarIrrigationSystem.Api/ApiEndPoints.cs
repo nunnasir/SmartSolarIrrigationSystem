@@ -28,7 +28,7 @@ public class ApiEndPoints
 
         public const string Create = Base;
         public const string Get = $"{Base}/{{id}}";
-        public const string GetByFieldId = $"{Base}/{{fieldId}}";
+        public const string GetByFieldId = $"{Base+"ByFieldId"}/{{fieldId}}";
         public const string GetAll = Base;
         public const string Update = $"{Base}/{{id:Guid}}";
         public const string Delete = $"{Base}/{{id:Guid}}";

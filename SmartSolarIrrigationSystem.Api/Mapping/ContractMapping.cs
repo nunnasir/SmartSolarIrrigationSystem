@@ -45,4 +45,67 @@ public static class ContractMapping
             Items = fieldInfoes.Select(MapToResponse)
         };
     }
+
+    public static StandardValue MapToStandardData(this CreateStandardDataRequest request)
+    {
+        return new StandardValue
+        {
+            Id = Guid.NewGuid(),
+            FieldInfoId = request.FieldInfoId,
+            Ph = request.Ph,
+            Mos = request.Mos,
+            Nit = request.Nit,
+            Phos = request.Phos,
+            Pot = request.Pot,
+            Water = request.Water,
+            Wfr = request.Wfr,
+            Node = request.Node,
+            CreatedTime = DateTime.UtcNow,
+        };
+    }
+
+    public static StandardValue MapToStandardData(this UpdateStandardDataRequest request, Guid id)
+    {
+        return new StandardValue
+        {
+            Id = id,
+            FieldInfoId = request.FieldInfoId,
+            Ph = request.Ph,
+            Mos = request.Mos,
+            Nit = request.Nit,
+            Phos = request.Phos,
+            Pot = request.Pot,
+            Water = request.Water,
+            Wfr = request.Wfr,
+            Node = request.Node,
+            UpdatedTime = DateTime.UtcNow,
+        };
+    }
+
+    public static StandardDataResponse MapToResponse(this StandardValue standardValue)
+    {
+        return new StandardDataResponse
+        {
+            Id = standardValue.Id,
+            FieldInfoId = standardValue.FieldInfoId,
+            FieldId = standardValue.FieldId,
+            FieldName = standardValue.FieldName,
+            Ph = standardValue.Ph,
+            Mos = standardValue.Mos,
+            Nit = standardValue.Nit,
+            Phos = standardValue.Phos,
+            Pot = standardValue.Pot,
+            Water = standardValue.Water,
+            Wfr = standardValue.Wfr,
+            Node = standardValue.Node,
+        };
+    }
+
+    public static StandardDatasResponse MapToResponse(this IEnumerable<StandardValue> standardValues)
+    {
+        return new StandardDatasResponse
+        {
+            Items = standardValues.Select(MapToResponse)
+        };
+    }
 }
