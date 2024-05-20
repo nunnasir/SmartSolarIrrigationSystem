@@ -21,13 +21,13 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowOrigin",
         builder =>
         {
-            builder.WithOrigins("localhost:5173")
-                   .AllowAnyHeader()
-                   .AllowAnyMethod();
-
-            //builder.WithOrigins("https://project-dashboard-roan.vercel.app")
+            //builder.WithOrigins("localhost:5173")
             //       .AllowAnyHeader()
             //       .AllowAnyMethod();
+
+            builder.WithOrigins("https://project-dashboard-roan.vercel.app")
+                   .AllowAnyHeader()
+                   .AllowAnyMethod();
         });
 });
 
