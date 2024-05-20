@@ -69,7 +69,6 @@ public static class ContractMapping
         return new StandardValue
         {
             Id = id,
-            FieldInfoId = request.FieldInfoId,
             Ph = request.Ph,
             Mos = request.Mos,
             Nit = request.Nit,
@@ -77,7 +76,6 @@ public static class ContractMapping
             Pot = request.Pot,
             Water = request.Water,
             Wfr = request.Wfr,
-            Node = request.Node,
             UpdatedTime = DateTime.UtcNow,
         };
     }

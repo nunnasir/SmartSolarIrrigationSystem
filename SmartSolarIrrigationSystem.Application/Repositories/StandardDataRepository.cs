@@ -92,7 +92,7 @@ public class StandardDataRepository : IStandardDataRepository
                        sv.node, 
                        sv.fieldInfoId,
                        fi.fieldId, 
-                       fi.name
+                       fi.name AS fieldName
                 FROM StandardValue sv
                 JOIN FieldInfo fi ON sv.FieldInfoId = fi.id
                 where sv.FieldInfoId = @fieldId
@@ -123,7 +123,7 @@ public class StandardDataRepository : IStandardDataRepository
                        sv.node, 
                        sv.fieldInfoId,
                        fi.fieldId, 
-                       fi.name
+                       fi.name AS fieldName
                 FROM StandardValue sv
                 JOIN FieldInfo fi ON sv.FieldInfoId = fi.id
                 where sv.id = @id
@@ -142,7 +142,7 @@ public class StandardDataRepository : IStandardDataRepository
         using var connection = await _dbConnectionFactory.CreateConnectionAsync(token);
 
         var result = await connection.ExecuteAsync(new CommandDefinition("""
-            update StandardValue set Ph = @Ph, mos = @Mos, nit = @Nit, phos = @Phos, pot = @Pot, water = @Water, wfr = @Wfr, updatedTime = @UpdatedTime
+            update StandardValue set ph = @Ph, mos = @Mos, nit = @Nit, phos = @Phos, pot = @Pot, water = @Water, wfr = @Wfr, updatedTime = @UpdatedTime
             where id = @Id
             """, standardValue, cancellationToken: token));
 
