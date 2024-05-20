@@ -1,5 +1,4 @@
-﻿using FluentValidation;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using SmartSolarIrrigationSystem.Application.Database;
 using SmartSolarIrrigationSystem.Application.Repositories;
 using SmartSolarIrrigationSystem.Application.Services;
@@ -12,11 +11,12 @@ public static class ApplicationServiceCollectionExtensions
     {
         services.AddSingleton<IDeviceDataRepository, DeviceDataRepository>();
         services.AddSingleton<IDeviceDataService, DeviceDataService>();
+
         services.AddSingleton<IFieldInfoRepository, FieldInfoRepository>();
         services.AddSingleton<IFieldInfoService, FieldInfoService>();
+
         services.AddSingleton<IStandardDataRepository, StandardDataRepository>();
         services.AddSingleton<IStandardDataService, StandardDataService>();
-        services.AddValidatorsFromAssemblyContaining<IApplicationMarker>(ServiceLifetime.Singleton);
 
         return services;
     }

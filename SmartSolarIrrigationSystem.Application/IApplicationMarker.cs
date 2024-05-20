@@ -1,6 +1,5 @@
-﻿namespace SmartSolarIrrigationSystem.Application
+﻿namespace SmartSolarIrrigationSystem.Application;
+
+public interface IApplicationMarker
 {
-    public interface IApplicationMarker
-    {
-    }
 }

@@ -8,6 +8,7 @@ var config = builder.Configuration;
 
 // Add services to the container.
 builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.Configure<MqttSettings>(config.GetSection("MqttSettings"));
 
@@ -32,7 +33,6 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 app.UseHttpsRedirection();
 
 app.UseStaticFiles();
@@ -41,6 +41,7 @@ app.UseRouting();
 app.UseCors("AllowOrigin");
 
 app.UseAuthorization();
+
 app.MapControllers();
 
 var dbInitializer = app.Services.GetRequiredService<DbInitializer>();

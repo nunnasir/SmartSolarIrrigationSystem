@@ -1,46 +1,40 @@
-﻿using FluentValidation;
-using SmartSolarIrrigationSystem.Application.Model;
+﻿using SmartSolarIrrigationSystem.Application.Model;
+using SmartSolarIrrigationSystem.Application.Repositories;
 
 namespace SmartSolarIrrigationSystem.Application.Services;
 
 public class FieldInfoService : IFieldInfoService
 {
-    private readonly IFieldInfoService _fieldInfoService;
-    private readonly IValidator<FieldInfo> _fieldInfoValidator;
+    private readonly IFieldInfoRepository _fieldInfoRepository;
 
-    public FieldInfoService(IFieldInfoService fieldInfoService, IValidator<FieldInfo> fieldInfoValidator)
+    public FieldInfoService(IFieldInfoRepository fieldInfoRepository)
     {
-        _fieldInfoService = fieldInfoService;
-        _fieldInfoValidator = fieldInfoValidator;
+        _fieldInfoRepository = fieldInfoRepository;
     }
 
     public async Task<bool> CreateAsync(FieldInfo fieldInfo, CancellationToken token = default)
     {
-        await _fieldInfoValidator.ValidateAndThrowAsync(fieldInfo, cancellationToken: token);
-
-        return await _fieldInfoService.CreateAsync(fieldInfo);
+        return await _fieldInfoRepository.CreateAsync(fieldInfo);
     }
 
     public async Task<bool> DeleteByIdAsync(Guid id, CancellationToken token = default)
     {
-        return await _fieldInfoService.DeleteByIdAsync(id);
+        return await _fieldInfoRepository.DeleteByIdAsync(id);
     }
 
     public async Task<IEnumerable<FieldInfo>> GetAllAsync(CancellationToken token = default)
     {
-        return await _fieldInfoService.GetAllAsync(token);
+        return await _fieldInfoRepository.GetAllAsync(token);
     }
 
     public async Task<FieldInfo?> GetByIdAsync(Guid id, CancellationToken token = default)
     {
-        return await _fieldInfoService.GetByIdAsync(id, token);
+        return await _fieldInfoRepository.GetByIdAsync(id, token);
     }
 
     public async Task<FieldInfo?> UpdateAsync(FieldInfo fieldInfo, CancellationToken token = default)
     {
-        await _fieldInfoValidator.ValidateAndThrowAsync(fieldInfo, cancellationToken: token);
-
-        await _fieldInfoService.UpdateAsync(fieldInfo, token);
+        await _fieldInfoRepository.UpdateAsync(fieldInfo, token);
 
         return fieldInfo;
     }

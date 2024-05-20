@@ -7,17 +7,14 @@ namespace SmartSolarIrrigationSystem.Application.Services;
 public class StandardDataService : IStandardDataService
 {
     private readonly IStandardDataRepository _standardDataRepository;
-    private readonly IValidator<StandardValue> _standardDataValidator;
 
-    public StandardDataService(IStandardDataRepository standardDataRepository, IValidator<StandardValue> standardDataValidator)
+    public StandardDataService(IStandardDataRepository standardDataRepository)
     {
         _standardDataRepository = standardDataRepository;
-        _standardDataValidator = standardDataValidator;
     }
 
     public async Task<bool> CreateAsync(StandardValue standardValue, CancellationToken token = default)
     {
-        await _standardDataValidator.ValidateAndThrowAsync(standardValue, cancellationToken: token);
         return await _standardDataRepository.CreateAsync(standardValue, token);
     }
 
@@ -43,8 +40,6 @@ public class StandardDataService : IStandardDataService
 
     public async Task<StandardValue?> UpdateAsync(StandardValue standardValue, CancellationToken token = default)
     {
-        await _standardDataValidator.ValidateAndThrowAsync(standardValue, cancellationToken: token);
-
         await _standardDataRepository.UpdateAsync(standardValue, token);
 
         return standardValue;

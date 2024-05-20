@@ -19,7 +19,7 @@ public class FieldInfoRepository : IFieldInfoRepository
 
         var result = await connection.ExecuteAsync(new CommandDefinition("""
             insert into FieldInfo (Id, FieldId, Name, CreatedTime)
-            values (@Id, @FieldId, @Name, @CreatedTime)
+            values (@Id, @FieldId, @FieldName, @CreatedTime)
             """, fieldInfo, cancellationToken: token));
 
         return result > 0;
@@ -50,15 +50,15 @@ public class FieldInfoRepository : IFieldInfoRepository
         var result = await connection.QueryAsync(new CommandDefinition("""
             SELECT fi.Id, 
                    fi.FieldId, 
-                   fi.FieldName 
+                   fi.Name 
             FROM FieldInfo fi 
             """, cancellationToken: token));
 
         var response = result.Select(x => new FieldInfo
         {
-            Id = x.id,
-            FieldId = x.title,
-            FieldName = x.title,
+            Id = x.Id,
+            FieldId = x.FieldId,
+            FieldName = x.Name,
         });
 
         return response;
@@ -70,9 +70,11 @@ public class FieldInfoRepository : IFieldInfoRepository
 
         var fieldInfo = await connection.QuerySingleOrDefaultAsync<FieldInfo>(
             new CommandDefinition("""
-                select fi.Id, fi.FieldId, fi.FieldName
-                from FieldInfo fi
-                where id = @id
+                SELECT fi.Id, 
+                       fi.FieldId, 
+                       fi.Name AS FieldName
+                FROM FieldInfo fi
+                where fi.Id = @id
                 """, new { id }, cancellationToken: token));
 
         if (fieldInfo is null)
@@ -88,7 +90,7 @@ public class FieldInfoRepository : IFieldInfoRepository
         using var connection = await _dbConnectionFactory.CreateConnectionAsync(token);
 
         var result = await connection.ExecuteAsync(new CommandDefinition("""
-            update FieldInfo set FieldId = @FieldId, FieldName = @FieldName, UpdateTime = @UpdateTime
+            update FieldInfo set FieldId = @FieldId, Name = @FieldName, UpdatedTime = @UpdatedTime
             where id = @Id
             """, fieldInfo, cancellationToken: token));
 

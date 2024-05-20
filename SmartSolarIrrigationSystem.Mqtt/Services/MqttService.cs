@@ -50,7 +50,7 @@ public class MqttService : IHostedService
                     Wfr = decimal.Parse(sensorData.Wfr),
                     Node = decimal.Parse(sensorData.N),
                     Sensor = decimal.Parse(sensorData.F),
-                    CreatedTime = DateTime.Now,
+                    CreatedTime = DateTime.UtcNow,
                     Id = Guid.NewGuid()
                 };
 
